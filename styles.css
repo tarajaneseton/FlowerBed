@@ -1,0 +1,71 @@
+.option-container {
+    width: 500px;
+    height: 50px;
+    margin: 30px 0;
+    background-color: #E5E4E2;
+    display: flex;
+    align-items: center;
+}
+
+.emoji {
+    align-items: center;
+    vertical-align: middle;
+    padding: 4px 4px 4px 4px;
+    border-radius: 4px;
+    margin: auto;
+    width: 100%;
+    font-size: 16px;
+}
+
+.rose {
+    background-color: #F5B7B1;
+}
+
+.hibiscus {
+    background-color: lightgreen;
+}
+
+.hyacinth {
+    background-color: lightyellow;
+}
+
+.tulip {
+    background-color: lightblue;
+}
+
+.sunflower {
+    background-color: black;
+}
+
+.rose-preview {
+    width: 40px;
+    height: 20px;
+    margin: 3px;
+}
+
+.hibiscus-preview {
+    width: 60px;
+    height: 20px;
+    margin: 3px;
+}
+
+.hyacinth-preview {
+    width: 60px;
+    height: 20px;
+    margin: 3px;
+}
+
+.tulip-preview {
+    width: 80px;
+    height: 20px;
+    margin: 3px;
+}
+
+.sunflower-preview {
+    width: 100px;
+    height: 20px;
+    margin: 3px;
+}
+
+
+
