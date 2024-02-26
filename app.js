@@ -26,7 +26,7 @@ function createBoard(color, user) {
         block.classList.add('block') // gives it a class name of block
         block.id = i //assigns an id of i to each block 
         gameBoardContainer.append(block) //append each block to the gamesboard container, this will happen 100 times
-    } 
+    } // need to update this to work with coordinates
     gamesBoardContainer.append(gameBoardContainer)
 }
 createBoard('green', 'player')
