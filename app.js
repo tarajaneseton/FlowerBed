@@ -13,14 +13,24 @@ const optionFlowerBeds = Array.from(optionContainer.children)
 
 // Creating the boards
 const width = 10
-function createBoard() {
+
+function createBoard(color, user) {
     const gameBoardContainer = document.createElement('div') //creating a div using javascript for the singular gameboard
     gameBoardContainer.classList.add('game-board') // adding the class name of game-board to assign height and width in css
-    gameBoardContainer.style.backgroundColor = 'green'
+    gameBoardContainer.style.backgroundColor = color
+    gameBoardContainer.id = user
 
+
+    for (let i = 0; i < width * width; i++ ) { // a loop to create the blocks that make up the board. 
+        const block = document.createElement('div') // the loop creates a div element
+        block.classList.add('block') // gives it a class name of block
+        block.id = i //assigns an id of i to each block 
+        gameBoardContainer.append(block) //append each block to the gamesboard container, this will happen 100 times
+    } 
     gamesBoardContainer.append(gameBoardContainer)
 }
-createBoard()
+createBoard('green', 'player')
+createBoard('lime', 'computer')
 
 
 flipButton.addEventListener('click', flip)
