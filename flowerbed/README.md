@@ -3,6 +3,7 @@
 
 ## 1. Challenge Outline
 
+
 ### 1a. Summary and review of the problem and an overall proposed solution
 The task was to create 'AdaShip', a clone of the class 'Battleship' game using an object-oriented approach. As a default, AdaShip is a two-player, turn based game of sea warfare. You and an opponent each place a number of ships on your own board. You then alternate turns "firing" torpedoes at each other’s ships. The game is won when one player has destroyed/sunk all of the other player’s ships.
 
