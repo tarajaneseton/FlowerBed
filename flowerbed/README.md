@@ -46,6 +46,15 @@ e. Initial object-oriented design ideas and planned phased breakdown into smalle
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).
 b. Phase 1 development: tasks, code review and changes(linked to 1d,1e).
+
+Tasks
+FB001 
+FB002: 
+- Reinstalled create-react-app
+- Moved files around accordingly
+- created .ini config file
+FB003:
+
 c. ..repeated for each development phase.
 d. Phase n development: tasks, code review and changes(linked to 1d,1e).
 e. Ensuring quality through testing and resolving bugs(linked to 1a, 1b, 2a, 2b..2c).
