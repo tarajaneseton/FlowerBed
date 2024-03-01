@@ -40,6 +40,16 @@ positions using their targetboard; a record of both “hits” and “misses” 
 
 d. Analysis and decomposition of the overall problem into key ‘epic’ style tasks (linked to 1b, 1c).
 
+FB004:
+- removed numbering and added coordinates
+- created loadConfiguration function to read from config.ini file
+- created initialiseGame function to load boards and flowerbeds based on config file
+- added code to rotate button so that rotation considers the coordinates
+- installed http-server so that I can view code in browser and view config file safely
+- increased the size of the boards so that the coordinates are visible
+- currently the numbers and letters are the wrong way around, needs to be corrected
+
+
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 
 2. Development (academic standard: merit level detail: section required for merit) – 15%

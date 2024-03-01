@@ -1,26 +1,44 @@
 
 #gamesboard-container {
+<<<<<<< HEAD
     width: 1000px;
+=======
+    width: 500px;
+>>>>>>> a6272e6 (FB004:)
     display: flex;
     justify-content: space-between;
 }
 
 .game-board {
+<<<<<<< HEAD
     width: 400px;
     height: 400px;
+=======
+    width: 220px;
+    height: 220px;
+>>>>>>> a6272e6 (FB004:)
     display: flex;
     flex-wrap: wrap;
 }
 
 .block {
+<<<<<<< HEAD
     width: 40px;
     height: 40px;
+=======
+    width: 20px;
+    height: 20px;
+>>>>>>> a6272e6 (FB004:)
     border: solid 1px black;
     box-sizing: border-box;
 }
 
 .option-container {
+<<<<<<< HEAD
     width: 1000px;
+=======
+    width: 1200px;
+>>>>>>> a6272e6 (FB004:)
     height: 120px;
     margin: 60px 0;
     background-color: #E5E4E2;
@@ -30,13 +48,14 @@
 
 
 .emoji {
+    display: flex;
     align-items: center;
     vertical-align: middle;
-    padding: 4px 4px 4px 4px;
-    border-radius: 4px;
+    /* padding: 2px 2px 2px 2px; */
+    border-radius: 2px;
     margin: auto;
     width: 100%;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .rose {
@@ -87,7 +106,8 @@
     width: 100px;
     height: 20px;
     margin: 3px;
+};
+
+#sunflower-emoji {
+    font-size: 12px;
 }
-
-
-
