@@ -50,9 +50,6 @@ async function loadConfiguration() {
     }
 }
 
-const gardenBoard = createBoard('green', 'garden');
-const neighbourBoard = createBoard('lime', 'neighbour');
-
 // Creating the boards
 
 //function to initialises the game by creating the garden and neighbour boards and places flowerbeds based on the config file
@@ -75,41 +72,44 @@ function createBoard(color, user) {
     gameBoardContainer.style.backgroundColor = color
     gameBoardContainer.id = user
 
-    // Creating the column labels and rows
+    
+    // Creating row labels 1-10
     const labelsRow = document.createElement('div');
     labelsRow.classList.add('labels-row');
-    for (let i = 0; i <= 10; i++) { //creates column labels A-J in the first row
+    for (let i = 1; i <= 10; i++) { //creates row labels 1-10
         const label = document.createElement('div'); 
-        label.classList.add('label'); // adding a label to create the column labels A-J
-        label.textContent = i === 0 ? '' : String.fromCharCode(64 + i);
+        label.classList.add('label'); // adding a label class to create the row labels 1-10
+        // label.textContent = i === 0 ? '' : String.fromCharCode(64 + i);
+        label.textContent = i;
         labelsRow.appendChild(label);
     }
     gameBoardContainer.appendChild(labelsRow);
 
-    // Row labels (1-10) and Blocks
-    for (let i = 0; i < 10; i++) {
+   // a loop to create the columns and blocks
+    for (let i = 0; i < 10; i++) { 
         const row = document.createElement('div');
         row.classList.add('row');
 
-        // Row labels (1-10)
-        const rowLabel = document.createElement('div');
-        rowLabel.classList.add('label');
-        rowLabel.textContent = i;
-        row.appendChild(rowLabel);
+        // Labelling the columns A-J
+        const columnLabel = document.createElement('div');
+        columnLabel.classList.add('label');
+        // rowLabel.textContent = i;
+        columnLabel.textContent = String.fromCharCode(65 + i);
+        row.appendChild(columnLabel);
 
-        //nested within the second loop to create the blocks
-        for (let j = 0; j <= 10; j++) {
+        //creating the blocks
+        for (let j = 0; j < 10; j++) {
             const block = document.createElement('div');
             block.classList.add('block');
-            if (j ===0) {
+            // if (j === 0) {
                 // Adding row labels 1-10
-                block.textContent = i;
-                block.classList.add('label');
-            } else {
-                block.dataset.coordinates = `${String.fromCharCode(65 + j)}${i + 1}`;
-            }
+                // block.textContent = i + 1;
+                // block.classList.add('label');
+            // } else {
+                block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
             row.appendChild(block);
         }
+
         gameBoardContainer.appendChild(row);
     }
 
@@ -123,8 +123,9 @@ function createBoard(color, user) {
 
     return gameBoardContainer;
 }
-// createBoard('green', 'player')
-// createBoard('lime', 'computer')
+
+const gardenBoard = createBoard('green', 'garden');
+const neighbourBoard = createBoard('lime', 'neighbour');
 
 // Function to read and place flowerbeds
 function createFlowerbeds(user, flowerbedConfig) {
