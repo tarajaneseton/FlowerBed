@@ -25,9 +25,9 @@ In order to help plan and prioritise tasks for the build of FlowerBed, I read th
 - The flowerbeds have different sizes and can be either be placed horizontally or vertically. Flowerbeds must be not overlap and neighbouring cells must be left empty.
 
 - By default there are five type of flowerbeds:
-    1. Sunflower 🌻 - Length 5
-    2. Tulip 🌷 - Length 4
-    3. Hibiscus 🌺 - Length 3
+    1. Sunflower 🌻 - Length 6
+    2. Tulip 🌷 - Length 5
+    3. Hibiscus 🌺 - Length 4
     4. Hyacinth 🪻 - Length 3 
     5. Rose 🌹 - Length 2
 
@@ -48,6 +48,16 @@ FB004:
 - installed http-server so that I can view code in browser and view config file safely
 - increased the size of the boards so that the coordinates are visible
 - currently the numbers and letters are the wrong way around, needs to be corrected
+
+FB005:
+- corrected coordinates by fixing for loops in createBoard()
+- updated board styling with new font and spacing
+
+FB006: 
+- each flowerbed now has unique size due to parseInt() associating flowerbed name with size
+- added reset, quit game and continue buttons
+- commented out ROTATE functionality, going to work on that later
+- changed flowerbed names to be lowercase
 
 
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).

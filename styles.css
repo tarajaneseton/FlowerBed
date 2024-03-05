@@ -44,15 +44,15 @@
 }
 
 
-.emoji {
+.flowerbeds {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     vertical-align: middle;
     /* padding: 2px 2px 2px 2px; */
     border-radius: 2px;
     margin: auto;
     width: 100%;
-    font-size: 12px;
+    font-size: 18px;
 }
 
 .rose {
@@ -82,7 +82,7 @@
 }
 
 .hibiscus-preview {
-    width: 60px;
+    width: 80px;
     height: 20px;
     margin: 3px;
 }
@@ -94,13 +94,13 @@
 }
 
 .tulip-preview {
-    width: 80px;
+    width: 100px;
     height: 20px;
     margin: 3px;
 }
 
 .sunflower-preview {
-    width: 100px;
+    width: 120px;
     height: 20px;
     margin: 3px;
 };

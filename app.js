@@ -3,32 +3,62 @@ const optionContainer = document.querySelector('.option-container')
 const rotateButton = document.querySelector('#rotate-button')
 
 //A function handles the rotation of the flowerbeds on button click
-let angle = 0 //global variable to start the flowerbed's angle as 0 
+// let angle = 0 //global variable to start the flowerbed's angle as 0 
 
-function rotate() {
-    const optionFlowerBeds = Array.from(optionContainer.children);
-    angle = angle === 0 ? 90 : 0;
+// optionContainer.addEventListener('click', rotate);
 
-    optionFlowerBeds.forEach((optionFlowerBed) => {
-        const originalCoordinates = optionFlowerBed.dataset.coordinates; // takes the original coordinates and updates them based on rotation
-        if (originalCoordinates) {
-            const [column, row] = originalCoordinates.split('');
-        } else {
-            console.error('Dataset coordinates not found for optionFlowerBed:', optionFlowerBed);
-            return;
-        }
+// function rotate(event) {
+//     const clickedElement = event.target;
 
-        const rotatedCoordinates =
-            angle === 90
-                ? `${String.fromCharCode(column.charCodeAt(0) + parseInt(row, 10))}${11 - parseInt(column, 36)}`
-                : `${String.fromCharCode(65 + parseInt(row, 10))}${parseInt(column, 36)}`;
+//     // Check if the clicked element is a flowerbed
+//     if (clickedElement.classList.contains('flowerbed')) {
+//         const originalCoordinates = clickedElement.dataset.coordinates;
 
-        optionFlowerBed.style.transform = `rotate(${angle}deg)`;
-        optionFlowerBed.dataset.coordinates = rotatedCoordinates;
-    });
-}
+//         if (originalCoordinates) {
+//             const [column, row] = originalCoordinates.split('');
 
-rotateButton.addEventListener('click', rotate);
+//             const rotatedCoordinates = angle === 90
+//                 ? `${String.fromCharCode(column.charCodeAt(0) + parseInt(row, 10))}${11 - parseInt(column, 36)}`
+//                 : `${String.fromCharCode(65 + parseInt(row, 10))}${parseInt(column, 36)}`;
+
+//             clickedElement.style.transform = `rotate(${angle}deg)`;
+//             clickedElement.dataset.coordinates = rotatedCoordinates;
+//         } else {
+//             console.error('Dataset coordinates not found for clicked flowerbed:', clickedElement);
+//         }
+//     }
+// }
+// function rotate() {
+//     const optionFlowerBeds = Array.from(optionContainer.children);
+//     angle = angle === 0 ? 90 : 0;
+
+//     optionFlowerBeds.forEach((optionFlowerBed) => {
+//         const originalCoordinates = optionFlowerBed.dataset.coordinates; // takes the original coordinates and updates them based on rotation
+
+//         let column, row;
+//         if (originalCoordinates) {
+//             console.log('Original coordinates:', originalCoordinates);
+//             [column, row] = originalCoordinates.split('');
+//             console.log('Column:', column, 'Row:', row);
+
+//         } else {
+//             console.error('Dataset coordinates not found for optionFlowerBed:', optionFlowerBed);
+//             return;
+//         }
+
+//         const rotatedCoordinates =
+//             angle === 90
+//                 ? `${String.fromCharCode(column.charCodeAt(0) + parseInt(row, 10))}${11 - parseInt(column, 36)}`
+//                 : `${String.fromCharCode(65 + parseInt(row, 10))}${parseInt(column, 36)}`;
+
+//                 console.log('Rotated Coordinates:', rotatedCoordinates);
+
+
+//         optionFlowerBed.style.transform = `rotate(${angle}deg)`;
+//         optionFlowerBed.dataset.coordinates = rotatedCoordinates;
+//     });
+// }
+
 
 
 // Function to read and load game configuration from flowerbed_config.ini file using Fetch API
@@ -44,9 +74,7 @@ async function loadConfiguration() {
     } catch (error) {
         console.error(error.message);
         return null;
-        // const data = await response.text();
-        // const config = parseConfig(data);
-        // console}
+
     }
 }
 
@@ -79,7 +107,6 @@ function createBoard(color, user) {
     for (let i = 1; i <= 10; i++) { //creates row labels 1-10
         const label = document.createElement('div'); 
         label.classList.add('label'); // adding a label class to create the row labels 1-10
-        // label.textContent = i === 0 ? '' : String.fromCharCode(64 + i);
         label.textContent = i;
         labelsRow.appendChild(label);
     }
@@ -101,11 +128,7 @@ function createBoard(color, user) {
         for (let j = 0; j < 10; j++) {
             const block = document.createElement('div');
             block.classList.add('block');
-            // if (j === 0) {
-                // Adding row labels 1-10
-                // block.textContent = i + 1;
-                // block.classList.add('label');
-            // } else {
+    
                 block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
             row.appendChild(block);
         }
@@ -113,12 +136,6 @@ function createBoard(color, user) {
         gameBoardContainer.appendChild(row);
     }
 
-    // for (let i = 0; i < width * width; i++ ) { // a loop to create the blocks that make up the board. 
-    //     const block = document.createElement('div') // the loop creates a div element
-    //     block.classList.add('block') // gives it a class name of block
-    //     block.id = i //assigns an id of i to each block 
-    //     gameBoardContainer.append(block) //append each block to the gamesboard container, this will happen 100 times
-    // } // need to update this to work with coordinates
     gamesBoardContainer.append(gameBoardContainer);
 
     return gameBoardContainer;
@@ -140,10 +157,19 @@ function createFlowerbeds(user, flowerbedConfig) {
     
     //a variable that splits the config file into lines and iterates over them
     const lines = flowerbedConfig.split('\n');
-    lines.forEach(line => {
+    lines.forEach((line, index) => {
         const [type, name, size] = line.trim().split(' '); //Destructing. extracting values from config file and splitting them
+
         if (type === 'Flowerbed') {
-            flowerbeds[name] = parseInt(size, 10);
+            // flowerbeds[name] = parseInt(size, 10);
+            const flowerbedSize = parseInt(size, 10);
+
+            if (isNaN(flowerbedSize)) {
+                console.error(`Invalid flowerbed size found on line ${index + 1}`);
+                return;
+            }
+
+            flowerbeds[name] = flowerbedSize;
         }
     });
 
@@ -151,11 +177,15 @@ function createFlowerbeds(user, flowerbedConfig) {
         for (let i = 0; i < flowerbeds[flowerbed]; i++) {
             const block = document.createElement('div');
             block.classList.add('flowerbed');
-            block.dataset.coordinates = `${flowerbed}${i + 1}`;
+            //
+            const coordinates = `${flowerbed}${i + 1}`;
+            block.dataset.coordinates = coordinates; // this line displays coordinates. if the rotate button works correctly, this can be deleted.
+            block.textContent = coordinates;
+
+            // block.dataset.coordinates = `${flowerbed}${i + 1}`;
             gameBoardContainer.append(block);
         }
     }
     }
 
-
-
+    
