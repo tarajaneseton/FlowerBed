@@ -59,6 +59,15 @@ FB006:
 - commented out ROTATE functionality, going to work on that later
 - changed flowerbed names to be lowercase
 
+FB007:
+- created Flowerbed class to create the flowerbeds for the neighbour/computer board
+- addFlowerbedPiece(flowerbed) adds each flowerbed to the neighbour board
+- added functionality to allow random placement on board for all ships
+- created validStart variable to start ensuring ship placement doesn't go off the board - need to add more to this
+- forEach loop to iterate over the flowerbedBlocks and adds the name of the flowerbed and the class 'watered'
+- added rose emoji to the rose flowerbed on the neighbour board
+
+
 
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 

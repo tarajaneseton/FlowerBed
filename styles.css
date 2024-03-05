@@ -44,7 +44,7 @@
 }
 
 
-.flowerbeds {
+.emoji {
     display: flex;
     /* align-items: center; */
     vertical-align: middle;
@@ -55,8 +55,10 @@
     font-size: 18px;
 }
 
-.rose {
+.rose::before { /*::before needed to produce emoji*/
     background-color: #F5B7B1;
+    content: "🌹";
+    font-size: 14px;
 }
 
 .hibiscus {

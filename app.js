@@ -142,7 +142,7 @@ function createBoard(color, user) {
 }
 
 const gardenBoard = createBoard('green', 'garden');
-const neighbourBoard = createBoard('lime', 'neighbour');
+const neighbourBoard = createBoard('darkseagreen', 'neighbour');
 
 // Function to read and place flowerbeds
 function createFlowerbeds(user, flowerbedConfig) {
@@ -153,7 +153,7 @@ function createFlowerbeds(user, flowerbedConfig) {
         return;
     }
 
-    const flowerbeds = {}; // initialising an empty object to store the flowerbeds from the config file
+    // const flowerbeds = {}; // initialising an empty object to store the flowerbeds from the config file
     
     //a variable that splits the config file into lines and iterates over them
     const lines = flowerbedConfig.split('\n');
@@ -188,4 +188,51 @@ function createFlowerbeds(user, flowerbedConfig) {
     }
     }
 
+    // Creating Flowerbeds
+    class Flowerbed {
+        constructor(name, size) {
+            this.name = name;
+            this.size = size;
+        }
+    }
     
+    const sunflower = new Flowerbed('sunflower', 6)
+    const tulip = new Flowerbed('tulip', 5)
+    const hibiscus = new Flowerbed('hibiscus', 4)
+    const hyacinth = new Flowerbed('hyacinth', 3)
+    const rose = new Flowerbed('rose', 2)
+    const width = 10
+const height = 10
+ 
+const flowerbeds = [sunflower, tulip, hibiscus, hyacinth, rose]
+ 
+//  function to add flowerbeds to the computer/neighbour board
+function addFlowerbedPiece(flowerbed) {
+    const allBoardBlocks = document.querySelectorAll('#neighbour div.block') // selecting all of the neighbour's blocks
+    let randomBoolean = Math.random() < 0.5 // produces a random boolean value
+    let isHorizontal = randomBoolean // assigns the random boolean value to isHorizontal, which will be used to determine the orientation of the flowerbed
+    let randomStartIndex = Math.floor(Math.random() * width * width ) // produce a random number between 1-100 to start
+
+    let validStart = isHorizontal ? randomStartIndex <= width * width - flowerbed.size ? randomStartIndex : //determine if its a valid horizontal start by deducting the size of the ship from the width of the board
+    width * width - flowerbed.size :
+    // handle vertical
+    randomStartIndex <= width * width - width * flowerbed.size ? randomStartIndex : 
+        randomStartIndex - flowerbed.size * width + width // if its true, i.e. smaller than 100 - 10 multiplied by the size of the flowerbed  then its valid so return the randomstartindex
+
+    let flowerbedBlocks = []
+ 
+    for (let i = 0; i < flowerbed.size; i++) { //
+        if (isHorizontal) { //if isHorizontal is true, figure out which indexes we want to colour with sunflowers
+            flowerbedBlocks.push(allBoardBlocks[Number(validStart) + i]) //if the randomStartIndex is 5, then the first block will be 5, 6 and so on based on flowerbed.size
+        } else { //if vertical
+            flowerbedBlocks.push(allBoardBlocks[Number(randomStartIndex) + i * width]) //if the randomStartIndex is 5, then the first block will be 5, 15 and so on based on flowerbed.size
+        }
+    }
+    // place the flowerbed on the board
+    flowerbedBlocks.forEach(flowerbedBlocks => { //iterates over the flowerbedBlocks and adds the name of the flowerbed to the flowerbedBlocks
+        flowerbedBlocks.classList.add(flowerbed.name) //adds the name of the flowerbed to the flowerbedBlocks
+        flowerbedBlocks.classList.add('watered') //adds the class of watered to the flowerbedBlocks
+    })
+}
+
+flowerbeds.forEach(flowerbed => addFlowerbedPiece(flowerbed)) //iterates over the flowerbeds array and adds the flowerbeds to the neighbour board    
