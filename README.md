@@ -67,7 +67,12 @@ FB007:
 - forEach loop to iterate over the flowerbedBlocks and adds the name of the flowerbed and the class 'watered'
 - added rose emoji to the rose flowerbed on the neighbour board
 
-
+FB008:
+- Created the valid variable which ensures the correct placement of all flowerbeds
+- Validation is correct for Horizontal flowerbeds, however vertical flowerbeds are still going off the board
+- Flowerbeds no longer overlap
+- Removed width variable and hard coded in size of board, 10 x 10
+- Might need to factor in coordinates and convert to numbers so that vertical works correctly, or implement rotate button
 
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 
