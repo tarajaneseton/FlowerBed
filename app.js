@@ -1,6 +1,7 @@
-const gamesBoardContainer = document.querySelector('#gamesboard-container')
-const optionContainer = document.querySelector('.option-container')
-const rotateButton = document.querySelector('#rotate-button')
+import { loadConfig, initialiseGame } from './modules/loadGame.js';
+import { createBoard } from './modules/boards.js';
+
+// const rotateButton = document.querySelector('#rotate-button')
 
 //A function handles the rotation of the flowerbeds on button click
 // let angle = 0 //global variable to start the flowerbed's angle as 0 
@@ -60,88 +61,56 @@ const rotateButton = document.querySelector('#rotate-button')
 // }
 
 
-
-// Function to read and load game configuration from flowerbed_config.ini file using Fetch API
-async function loadConfiguration() {
-    const configFilePath = './flowerbed_config.ini';
-
-    try {
-        const response = await fetch(configFilePath);
-        if (!response.ok) {
-            throw new Error('Failed to load configuration from ${configFilePath}');
-        }
-        return await response.text();
-    } catch (error) {
-        console.error(error.message);
-        return null;
-
-    }
-}
-
-// Creating the boards
-
-//function to initialises the game by creating the garden and neighbour boards and places flowerbeds based on the config file
-async function initialiseGame() {
-    const flowerbedConfig = await loadConfiguration();
-
-    if (!flowerbedConfig) {
-        createFlowerbeds('garden', 'flowerbedConfig');
-        createFlowerbeds('neighbour', 'flowerbedConfig');
-    }
-}
-
 // Calling the initilise game function
 initialiseGame();
 
-const width = 10
-
-// Function to create a board with columns, rows and blocks with coordinates based on the config file
-function createBoard(color, user) {
-    const gameBoardContainer = document.createElement('div') //creating a div using javascript for the singular gameboard
-    gameBoardContainer.classList.add('game-board') // adding the class name of game-board to assign height and width in css
-    gameBoardContainer.style.backgroundColor = color
-    gameBoardContainer.id = user
+// // Function to create a board with columns, rows and blocks with coordinates based on the config file
+// function createBoard(color, user) {
+//     const gameBoardContainer = document.createElement('div') //creating a div using javascript for the singular gameboard
+//     gameBoardContainer.classList.add('game-board') // adding the class name of game-board to assign height and width in css
+//     gameBoardContainer.style.backgroundColor = color
+//     gameBoardContainer.id = user
 
     
-    // Creating row labels 1-10
-    const labelsRow = document.createElement('div');
-    labelsRow.classList.add('labels-row');
-    for (let i = 1; i <= 10; i++) { //creates row labels 1-10
-        const label = document.createElement('div'); 
-        label.classList.add('label'); // adding a label class to create the row labels 1-10
-        label.textContent = i;
-        labelsRow.appendChild(label);
-    }
-    gameBoardContainer.appendChild(labelsRow);
+//     // Creating row labels 1-10
+//     const labelsRow = document.createElement('div');
+//     labelsRow.classList.add('labels-row');
+//     for (let i = 1; i <= 10; i++) { //creates row labels 1-10
+//         const label = document.createElement('div'); 
+//         label.classList.add('label'); // adding a label class to create the row labels 1-10
+//         label.textContent = i;
+//         labelsRow.appendChild(label);
+//     }
+//     gameBoardContainer.appendChild(labelsRow);
 
-   // a loop to create the columns and blocks
-    for (let i = 0; i < 10; i++) { 
-        const row = document.createElement('div');
-        row.classList.add('row');
+//    // a loop to create the columns and blocks
+//     for (let i = 0; i < 10; i++) { 
+//         const row = document.createElement('div');
+//         row.classList.add('row');
 
-        // Labelling the columns A-J
-        const columnLabel = document.createElement('div');
-        columnLabel.classList.add('label');
-        // rowLabel.textContent = i;
-        columnLabel.textContent = String.fromCharCode(65 + i);
-        row.appendChild(columnLabel);
+//         // Labelling the columns A-J
+//         const columnLabel = document.createElement('div');
+//         columnLabel.classList.add('label');
+//         // rowLabel.textContent = i;
+//         columnLabel.textContent = String.fromCharCode(65 + i);
+//         row.appendChild(columnLabel);
 
-        //creating the blocks
-        for (let j = 0; j < 10; j++) {
-            const block = document.createElement('div');
-            block.classList.add('block');
+//         //creating the blocks
+//         for (let j = 0; j < 10; j++) {
+//             const block = document.createElement('div');
+//             block.classList.add('block');
     
-                block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
-            row.appendChild(block);
-        }
+//                 block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
+//             row.appendChild(block);
+//         }
 
-        gameBoardContainer.appendChild(row);
-    }
+//         gameBoardContainer.appendChild(row);
+//     }
 
-    gamesBoardContainer.append(gameBoardContainer);
+//     gamesBoardContainer.append(gameBoardContainer);
 
-    return gameBoardContainer;
-}
+//     return gameBoardContainer;
+// }
 
 const gardenBoard = createBoard('green', 'garden');
 const neighbourBoard = createBoard('darkseagreen', 'neighbour');
@@ -214,7 +183,7 @@ function addFlowerbedPiece(flowerbed) {
     
     let validStart = isHorizontal ? randomStartIndex <= 100 - flowerbed.size ? randomStartIndex : //determine if its a valid horizontal start by deducting the size of the flowerbed from the width of the board
     100 - flowerbed.size :
-    // handle vertical
+    // handle vertical - this doesnt work right now, vertical is going off the board....
     randomStartIndex <= 100 - 10 * flowerbed.size ? randomStartIndex : // if its true, i.e. smaller than 100 - 10 multiplied by the size of the flowerbed then its valid so return the randomstartindex
         randomStartIndex - flowerbed.size * 10 + 10 //   if not, then deduct the size of the flowerbed and multiply by the size of the board
 

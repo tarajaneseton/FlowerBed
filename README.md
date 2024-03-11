@@ -42,7 +42,7 @@ d. Analysis and decomposition of the overall problem into key ‘epic’ style t
 
 FB004:
 - removed numbering and added coordinates
-- created loadConfiguration function to read from config.ini file
+- created loadConfig function to read from config.ini file
 - created initialiseGame function to load boards and flowerbeds based on config file
 - added code to rotate button so that rotation considers the coordinates
 - installed http-server so that I can view code in browser and view config file safely
@@ -73,6 +73,13 @@ FB008:
 - Flowerbeds no longer overlap
 - Removed width variable and hard coded in size of board, 10 x 10
 - Might need to factor in coordinates and convert to numbers so that vertical works correctly, or implement rotate button
+
+FB009: 
+- Started to use modules
+- loadGame.js file now holds initialiseGame() + loadConfig()
+- boards.js file now holds createBoard()
+- Boards are visible and functioning
+
 
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 
