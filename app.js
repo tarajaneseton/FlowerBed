@@ -1,5 +1,6 @@
 import { loadConfig, initialiseGame } from './modules/loadGame.js';
 import { createBoard } from './modules/boards.js';
+import Flowerbed, { createFlowerbeds, flowerbeds } from './modules/flowerBeds.js';
 
 // const rotateButton = document.querySelector('#rotate-button')
 
@@ -64,116 +65,9 @@ import { createBoard } from './modules/boards.js';
 // Calling the initilise game function
 initialiseGame();
 
-// // Function to create a board with columns, rows and blocks with coordinates based on the config file
-// function createBoard(color, user) {
-//     const gameBoardContainer = document.createElement('div') //creating a div using javascript for the singular gameboard
-//     gameBoardContainer.classList.add('game-board') // adding the class name of game-board to assign height and width in css
-//     gameBoardContainer.style.backgroundColor = color
-//     gameBoardContainer.id = user
-
-    
-//     // Creating row labels 1-10
-//     const labelsRow = document.createElement('div');
-//     labelsRow.classList.add('labels-row');
-//     for (let i = 1; i <= 10; i++) { //creates row labels 1-10
-//         const label = document.createElement('div'); 
-//         label.classList.add('label'); // adding a label class to create the row labels 1-10
-//         label.textContent = i;
-//         labelsRow.appendChild(label);
-//     }
-//     gameBoardContainer.appendChild(labelsRow);
-
-//    // a loop to create the columns and blocks
-//     for (let i = 0; i < 10; i++) { 
-//         const row = document.createElement('div');
-//         row.classList.add('row');
-
-//         // Labelling the columns A-J
-//         const columnLabel = document.createElement('div');
-//         columnLabel.classList.add('label');
-//         // rowLabel.textContent = i;
-//         columnLabel.textContent = String.fromCharCode(65 + i);
-//         row.appendChild(columnLabel);
-
-//         //creating the blocks
-//         for (let j = 0; j < 10; j++) {
-//             const block = document.createElement('div');
-//             block.classList.add('block');
-    
-//                 block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
-//             row.appendChild(block);
-//         }
-
-//         gameBoardContainer.appendChild(row);
-//     }
-
-//     gamesBoardContainer.append(gameBoardContainer);
-
-//     return gameBoardContainer;
-// }
-
 const gardenBoard = createBoard('green', 'garden');
 const neighbourBoard = createBoard('darkseagreen', 'neighbour');
 
-// Function to read and place flowerbeds
-function createFlowerbeds(user, flowerbedConfig) {
-    const gameBoardContainer = document.getElementById(user);
-
-    if(!gameBoardContainer) {
-        console.error(`Game board container not found for user $(user)`);
-        return;
-    }
-
-    // const flowerbeds = {}; // initialising an empty object to store the flowerbeds from the config file
-    
-    //a variable that splits the config file into lines and iterates over them
-    const lines = flowerbedConfig.split('\n');
-    lines.forEach((line, index) => {
-        const [type, name, size] = line.trim().split(' '); //Destructing. extracting values from config file and splitting them
-
-        if (type === 'Flowerbed') {
-            const flowerbedSize = parseInt(size, 10);
-
-            if (isNaN(flowerbedSize)) {
-                console.error(`Invalid flowerbed size found on line ${index + 1}`);
-                return;
-            }
-
-            flowerbeds[name] = flowerbedSize; // look into how to store these values, and reuse with the flowerbeds class (so i dont need to hard code)
-        }
-    });
-
-    for (let flowerbed in flowerbeds) {
-        for (let i = 0; i < flowerbeds[flowerbed]; i++) {
-            const block = document.createElement('div');
-            block.classList.add('flowerbed');
-            //
-            const coordinates = `${flowerbed}${i + 1}`;
-            block.dataset.coordinates = coordinates; // this line displays coordinates. if the rotate button works correctly, this can be deleted.
-            block.textContent = coordinates;
-
-            // block.dataset.coordinates = `${flowerbed}${i + 1}`;
-            gameBoardContainer.append(block);
-        }
-    }
-    }
-
-    // Creating Flowerbeds
-    class Flowerbed {
-        constructor(name, size) {
-            this.name = name;
-            this.size = size;
-        }
-    }
-    
-    const sunflower = new Flowerbed('sunflower', 6)
-    const tulip = new Flowerbed('tulip', 5)
-    const hibiscus = new Flowerbed('hibiscus', 4)
-    const hyacinth = new Flowerbed('hyacinth', 3)
-    const rose = new Flowerbed('rose', 2)
- 
-const flowerbeds = [sunflower, tulip, hibiscus, hyacinth, rose]
- 
 //  function to add flowerbeds to the computer/neighbour board
 function addFlowerbedPiece(flowerbed) {
     const allBoardBlocks = document.querySelectorAll('#neighbour div.block') // selecting all of the neighbour's blocks
@@ -207,7 +101,7 @@ function addFlowerbedPiece(flowerbed) {
         const rowIndex = Math.floor(validStart / 10) + index;
         const columnIndex = validStart % 10;
         const row = rowIndex + 1;
-        console.log(`Index: ${index}, Row: ${row}, Column: ${columnIndex + 1}`);
+        // console.log(`Index: ${index}, Row: ${row}, Column: ${columnIndex + 1}`);
         
     valid = flowerbedBlocks[0].id < 90 + (10 * index + 1)
 });

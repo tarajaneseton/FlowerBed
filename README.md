@@ -80,6 +80,9 @@ FB009:
 - boards.js file now holds createBoard()
 - Boards are visible and functioning
 
+FB010:
+- flowerBeds.js file now holds Flowerbeds class and createFlowerbeds() module
+
 
 e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 
