@@ -1,0 +1,13 @@
+{
+  "name": "flowerbed",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "description": "## 1. Challenge Outline",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

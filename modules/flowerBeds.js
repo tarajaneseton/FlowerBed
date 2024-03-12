@@ -1,3 +1,4 @@
+import { createBoard } from './boards.js';
 // Purpose: To create flowerbeds based on the config file 
  // Creating Flowerbeds
 export default class Flowerbed {
@@ -56,3 +57,4 @@ export function createFlowerbeds(user, flowerbedConfig) {
         }
     }
     }
+

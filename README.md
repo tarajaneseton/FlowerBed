@@ -40,6 +40,8 @@ positions using their targetboard; a record of both “hits” and “misses” 
 
 d. Analysis and decomposition of the overall problem into key ‘epic’ style tasks (linked to 1b, 1c).
 
+e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
+
 FB004:
 - removed numbering and added coordinates
 - created loadConfig function to read from config.ini file
@@ -82,9 +84,12 @@ FB009:
 
 FB010:
 - flowerBeds.js file now holds Flowerbeds class and createFlowerbeds() module
+- player1 folder holds placeFlowerbeds.js file with functionality for placing flowerbeds on board
+- added emoji styling to the neighbour board's flowerbed blocks
+- updated names of user's for consistency to identify id issues
+- still have issues with reading 'size'
 
 
-e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
 
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).
@@ -95,7 +100,15 @@ e. Ensuring quality through testing and resolving bugs(linked to 1a, 1b, 2a, 2b.
 f. Reflection on key design challenges, innovations and how they were solved (with examples).
 3. Evaluation (academic standard: distinction level detail: section required for distinction) – 10%
 a. Analysis with embedded examples of key code refactoring, reuse, smells.
+
 b. Implementation and effective use of ‘advanced’ programming principles(with examples).
+
+After building the basic functionality for Flowerbeds: 2 boards that are 10x10 in size with coordinates, 6 ships of different sizes and XYZ, I need to go back and incorporate modularisation into my code. I referred back to my UML diagram and edited the classes that I had originally planned. I began separating my code into separate files, I started with the simplest functions first that had the fewest amount of dependencies: XYZ. I faced difficulties when trying to import the addFlowerbedPiece function. Due to the way I had created thefunction it was hard t o know which dependencies were needed. So I decided to pause on building modules and continue creating the game logic instead. In hindsight if I had taken the time to learn and understand OOP and modularisation to begin with i could have started from a better place.
+
 c. Featuresshowcase and embedded innovations(with examples) - opportunity to ‘highlight’ best bits.
+
 d. Improved algorithms – research, design, implementation, and tested confirmation (with examples).
+
+Added modularisation
+Added Node.js (?) - original tutorial uses things like queryselector however i needed to change this to work with node. I wanted to implement node because xyz
 e. Reflective review, opportunitiesto improve and continued professional development.

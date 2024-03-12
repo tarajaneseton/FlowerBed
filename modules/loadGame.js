@@ -22,7 +22,7 @@ export async function initialiseGame() {
     const flowerbedConfig = await loadConfig();
 
     if (!flowerbedConfig) {
-        createFlowerbeds('garden', 'flowerbedConfig');
-        createFlowerbeds('neighbour', 'flowerbedConfig');
+        createFlowerbeds('player', 'flowerbedConfig');
+        createFlowerbeds('computer', 'flowerbedConfig');
     }
 }

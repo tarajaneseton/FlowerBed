@@ -1,6 +1,8 @@
 import { loadConfig, initialiseGame } from './modules/loadGame.js';
 import { createBoard } from './modules/boards.js';
 import Flowerbed, { createFlowerbeds, flowerbeds } from './modules/flowerBeds.js';
+const optionContainer = document.querySelector('.option-container')
+
 
 // const rotateButton = document.querySelector('#rotate-button')
 
@@ -65,12 +67,14 @@ import Flowerbed, { createFlowerbeds, flowerbeds } from './modules/flowerBeds.js
 // Calling the initilise game function
 initialiseGame();
 
-const gardenBoard = createBoard('green', 'garden');
-const neighbourBoard = createBoard('darkseagreen', 'neighbour');
+const playerBoard = createBoard('green', 'player');
+const computerBoard = createBoard('darkseagreen', 'computer');
 
 //  function to add flowerbeds to the computer/neighbour board
-function addFlowerbedPiece(flowerbed) {
-    const allBoardBlocks = document.querySelectorAll('#neighbour div.block') // selecting all of the neighbour's blocks
+
+
+function addFlowerbedPiece(user, flowerbed, startId) {
+    const allBoardBlocks = document.querySelectorAll('#computer div.block') // selecting all of the neighbour's blocks
     let randomBoolean = Math.random() < 0.5 // produces a random boolean value
     let isHorizontal = randomBoolean // assigns the random boolean value to isHorizontal, which will be used to determine the orientation of the flowerbed
     let randomStartIndex = Math.floor(Math.random() * 100 ) // produce a random number between 1-100 to start
@@ -107,7 +111,7 @@ function addFlowerbedPiece(flowerbed) {
 });
 }
 
-//Ensure that flowerbeds are not placed on top of eachother
+//A loop that keeps running to ensure that the placement of a flowerbed block is not placed on a 'taken'. It keeps running until the flowerbed is placed correctly on a not taken block.
     const notTaken = flowerbedBlocks.every(flowerbedBlock => !flowerbedBlock.classList.contains('taken')) // cuse every method to check if every flowerbed contains the class taken, then we know its 'not taken'
 
 
@@ -122,4 +126,5 @@ function addFlowerbedPiece(flowerbed) {
     
 }
 
-flowerbeds.forEach(flowerbed => addFlowerbedPiece(flowerbed)) //iterates over the flowerbeds array and adds the flowerbeds to the neighbour board    
+flowerbeds.forEach(flowerbed => addFlowerbedPiece('computer', flowerbed)) //iterates over the flowerbeds array and adds the flowerbeds to the neighbour board    
+

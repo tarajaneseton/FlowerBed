@@ -1,5 +1,4 @@
 const gamesBoardContainer = document.querySelector('#gamesboard-container')
-const optionContainer = document.querySelector('.option-container')
 
 // Function to create a board with columns, rows and blocks with coordinates based on the config file
 export function createBoard(color, user) {
