@@ -1,6 +1,6 @@
-import { loadConfig, initialiseGame } from './modules/loadGame.js';
+import { initialiseGame } from './modules/loadGame.js';
 import { createBoard } from './modules/boards.js';
-import Flowerbed, { createFlowerbeds, flowerbeds } from './modules/flowerBeds.js';
+import Flowerbed, { flowerbeds } from './modules/flowerBeds.js';
 const optionContainer = document.querySelector('.option-container')
 
 

@@ -89,7 +89,8 @@ FB010:
 - updated names of user's for consistency to identify id issues
 - still have issues with reading 'size'
 
-
+FB011:
+- config ini file is now being read out logged to the console
 
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).

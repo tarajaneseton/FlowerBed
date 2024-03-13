@@ -17,7 +17,7 @@ export default class Flowerbed {
 export const flowerbeds = [sunflower, tulip, hibiscus, hyacinth, rose]
 
 // function to create flowerbeds based on the config file
-export function createFlowerbeds(user, flowerbedConfig) { 
+function createFlowerbeds(user, flowerbedConfig) { 
     const gameBoardContainer = document.getElementById(user); //selects the game board container based on the user
 
     if(!gameBoardContainer) { // if the game board container is not found, then log an error message
@@ -25,22 +25,22 @@ export function createFlowerbeds(user, flowerbedConfig) {
         return;
     }
     
-    const lines = flowerbedConfig.split('\n'); //splits the config file into lines
-    lines.forEach((line, index) => { // iterates over the lines
-        const [type, name, size] = line.trim().split(' '); //splits the line into type, name and size e.g. Flowerbed sunflower 6
+    // const lines = flowerbedConfig.split('\n'); //splits the config file into lines
+    // lines.forEach((line, index) => { // iterates over the lines
+    //     const [type, name, size] = line.trim().split(' '); //splits the line into type, name and size e.g. Flowerbed sunflower 6
 
-        if (type === 'Flowerbed') { //if the type is flowerbed, then create a flowerbed
-            const flowerbedSize = parseInt(size, 10); //parses the size of the flowerbed into an integer
+    //     if (type === 'Flowerbed') { //if the type is flowerbed, then create a flowerbed
+    //         const flowerbedSize = parseInt(size, 10); //parses the size of the flowerbed into an integer
 
-            if (isNaN(flowerbedSize)) { //if the flowerbed size is not a number, then log an error message
-                console.error(`Invalid flowerbed size found on line ${index + 1}`);
-                return;
-            }
+    //         if (isNaN(flowerbedSize)) { //if the flowerbed size is not a number, then log an error message
+    //             console.error(`Invalid flowerbed size found on line ${index + 1}`);
+    //             return;
+    //         }
 
-            flowerbeds[name] = flowerbedSize; //assigns the flowerbed name and size to the flowerbeds object
-            console.log(flowerbeds)
-        }
-    });
+    //         flowerbeds[name] = flowerbedSize; //assigns the flowerbed name and size to the flowerbeds object
+    //         console.log(flowerbeds)
+    //     }
+    // });
 
     // Creating the flowerbeds
     for (let flowerbed in flowerbeds) { //iterates over the flowerbeds
