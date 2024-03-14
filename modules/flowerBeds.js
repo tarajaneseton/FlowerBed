@@ -1,20 +1,7 @@
 import { createBoard } from './boards.js';
+import Flowerbed, { flowerbeds } from './app.js';
 // Purpose: To create flowerbeds based on the config file 
- // Creating Flowerbeds
-export default class Flowerbed {
-        constructor(name, size) {
-            this.name = name;
-            this.size = size;
-        }
-    }
-    
-    const sunflower = new Flowerbed('sunflower', 6)
-    const tulip = new Flowerbed('tulip', 5)
-    const hibiscus = new Flowerbed('hibiscus', 4)
-    const hyacinth = new Flowerbed('hyacinth', 3)
-    const rose = new Flowerbed('rose', 2)
- 
-export const flowerbeds = [sunflower, tulip, hibiscus, hyacinth, rose]
+
 
 // function to create flowerbeds based on the config file
 function createFlowerbeds(user, flowerbedConfig) { 
@@ -24,23 +11,7 @@ function createFlowerbeds(user, flowerbedConfig) {
         console.error(`Game board container not found for user $(user)`);
         return;
     }
-    
-    // const lines = flowerbedConfig.split('\n'); //splits the config file into lines
-    // lines.forEach((line, index) => { // iterates over the lines
-    //     const [type, name, size] = line.trim().split(' '); //splits the line into type, name and size e.g. Flowerbed sunflower 6
 
-    //     if (type === 'Flowerbed') { //if the type is flowerbed, then create a flowerbed
-    //         const flowerbedSize = parseInt(size, 10); //parses the size of the flowerbed into an integer
-
-    //         if (isNaN(flowerbedSize)) { //if the flowerbed size is not a number, then log an error message
-    //             console.error(`Invalid flowerbed size found on line ${index + 1}`);
-    //             return;
-    //         }
-
-    //         flowerbeds[name] = flowerbedSize; //assigns the flowerbed name and size to the flowerbeds object
-    //         console.log(flowerbeds)
-    //     }
-    // });
 
     // Creating the flowerbeds
     for (let flowerbed in flowerbeds) { //iterates over the flowerbeds

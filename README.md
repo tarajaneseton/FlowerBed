@@ -92,6 +92,13 @@ FB010:
 FB011:
 - config ini file is now being read out logged to the console
 
+FB012:
+- removed config file and all related code
+- reverted to using class for flowerbed
+- implemented drag and drop for player1's ships
+- the flowerbed blocks are not autoplacing everytime, and the drag and drop is not working either
+
+
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).
 b. Phase 1 development: tasks, code review and changes(linked to 1d,1e).

@@ -1,93 +1,52 @@
-import { initialiseGame } from './modules/loadGame.js';
 import { createBoard } from './modules/boards.js';
-import Flowerbed, { flowerbeds } from './modules/flowerBeds.js';
+import { angle, rotate, rotateButton } from './buttons/rotateButton.js';
 const optionContainer = document.querySelector('.option-container')
-
-
-// const rotateButton = document.querySelector('#rotate-button')
-
-//A function handles the rotation of the flowerbeds on button click
-// let angle = 0 //global variable to start the flowerbed's angle as 0 
-
-// optionContainer.addEventListener('click', rotate);
-
-// function rotate(event) {
-//     const clickedElement = event.target;
-
-//     // Check if the clicked element is a flowerbed
-//     if (clickedElement.classList.contains('flowerbed')) {
-//         const originalCoordinates = clickedElement.dataset.coordinates;
-
-//         if (originalCoordinates) {
-//             const [column, row] = originalCoordinates.split('');
-
-//             const rotatedCoordinates = angle === 90
-//                 ? `${String.fromCharCode(column.charCodeAt(0) + parseInt(row, 10))}${11 - parseInt(column, 36)}`
-//                 : `${String.fromCharCode(65 + parseInt(row, 10))}${parseInt(column, 36)}`;
-
-//             clickedElement.style.transform = `rotate(${angle}deg)`;
-//             clickedElement.dataset.coordinates = rotatedCoordinates;
-//         } else {
-//             console.error('Dataset coordinates not found for clicked flowerbed:', clickedElement);
-//         }
-//     }
-// }
-// function rotate() {
-//     const optionFlowerBeds = Array.from(optionContainer.children);
-//     angle = angle === 0 ? 90 : 0;
-
-//     optionFlowerBeds.forEach((optionFlowerBed) => {
-//         const originalCoordinates = optionFlowerBed.dataset.coordinates; // takes the original coordinates and updates them based on rotation
-
-//         let column, row;
-//         if (originalCoordinates) {
-//             console.log('Original coordinates:', originalCoordinates);
-//             [column, row] = originalCoordinates.split('');
-//             console.log('Column:', column, 'Row:', row);
-
-//         } else {
-//             console.error('Dataset coordinates not found for optionFlowerBed:', optionFlowerBed);
-//             return;
-//         }
-
-//         const rotatedCoordinates =
-//             angle === 90
-//                 ? `${String.fromCharCode(column.charCodeAt(0) + parseInt(row, 10))}${11 - parseInt(column, 36)}`
-//                 : `${String.fromCharCode(65 + parseInt(row, 10))}${parseInt(column, 36)}`;
-
-//                 console.log('Rotated Coordinates:', rotatedCoordinates);
-
-
-//         optionFlowerBed.style.transform = `rotate(${angle}deg)`;
-//         optionFlowerBed.dataset.coordinates = rotatedCoordinates;
-//     });
-// }
-
-
-// Calling the initilise game function
-initialiseGame();
 
 const playerBoard = createBoard('green', 'player');
 const computerBoard = createBoard('darkseagreen', 'computer');
 
+ // Creating Flowerbeds
+ export default class Flowerbed {
+    constructor(name, length) {
+        this.name = name;
+        this.length = length;
+    }
+}
+
+const sunflower = new Flowerbed('sunflower', 6)
+const tulip = new Flowerbed('tulip', 5)
+const hibiscus = new Flowerbed('hibiscus', 4)
+const hyacinth = new Flowerbed('hyacinth', 3)
+const rose = new Flowerbed('rose', 2)
+
+export const flowerbeds = [sunflower, tulip, hibiscus, hyacinth, rose]
+let notDropped
+
+
+
+
 //  function to add flowerbeds to the computer/neighbour board
 
 
-function addFlowerbedPiece(user, flowerbed, startId) {
-    const allBoardBlocks = document.querySelectorAll('#computer div.block') // selecting all of the neighbour's blocks
+function addFlowerbedPiece(user, flowerbeds, Flowerbed, startId) {
+    console.log("flowerbeds:", flowerbeds);
+
+    const allBoardBlocks = document.querySelectorAll(`#${user} div.block`) // selecting all of the neighbour's blocks
     let randomBoolean = Math.random() < 0.5 // produces a random boolean value
-    let isHorizontal = randomBoolean // assigns the random boolean value to isHorizontal, which will be used to determine the orientation of the flowerbed
+    let isHorizontal = user === 'player' ? angle === 0 : randomBoolean // assigns the random boolean value to isHorizontal, which will be used to determine the orientation of the flowerbed
     let randomStartIndex = Math.floor(Math.random() * 100 ) // produce a random number between 1-100 to start
     
-    let validStart = isHorizontal ? randomStartIndex <= 100 - flowerbed.size ? randomStartIndex : //determine if its a valid horizontal start by deducting the size of the flowerbed from the width of the board
-    100 - flowerbed.size :
+    let startIndex = startId ? startId : randomStartIndex
+    let validStart = isHorizontal ? startIndex <= 100 - flowerbeds.length ? startIndex : //determine if its a valid horizontal start by deducting the size of the flowerbed from the width of the board
+    100 - flowerbeds.length :
+    
     // handle vertical - this doesnt work right now, vertical is going off the board....
-    randomStartIndex <= 100 - 10 * flowerbed.size ? randomStartIndex : // if its true, i.e. smaller than 100 - 10 multiplied by the size of the flowerbed then its valid so return the randomstartindex
-        randomStartIndex - flowerbed.size * 10 + 10 //   if not, then deduct the size of the flowerbed and multiply by the size of the board
+    startIndex <= 100 - 10 * flowerbeds.length ? startIndex : // if its true, i.e. smaller than 100 - 10 multiplied by the size of the flowerbed then its valid so return the randomstartindex
+    startIndex - flowerbeds.length * 10 + 10 //   if not, then deduct the size of the flowerbed and multiply by the size of the board
 
     let flowerbedBlocks = []
  
-    for (let i = 0; i < flowerbed.size; i++) { //
+    for (let i = 0; i < flowerbeds.length; i++) { //
         if (isHorizontal) { //if isHorizontal is true, figure out which indexes we want to colour with sunflowers
             flowerbedBlocks.push(allBoardBlocks[Number(validStart) + i]) //if the randomStartIndex is 5, then the first block will be 5, 6 and so on based on flowerbed.size
         } else { //if vertical
@@ -98,7 +57,7 @@ function addFlowerbedPiece(user, flowerbed, startId) {
 
     if (isHorizontal) { //further validation to prevent flowerbeds splitting and overlapping off the board
     flowerbedBlocks.every((_flowerbedBlock, index) => 
-        valid = flowerbedBlocks[0].id % 10 !== 10 - (flowerbedBlocks.size - (index + 1))) //if horizontal is true, use every method to check each flower bed block in a loop
+        valid = flowerbedBlocks[0].id % 10 !== 10 - (flowerbedBlocks.length - (index + 1))) //if horizontal is true, use every method to check each flower bed block in a loop
     // take the first flowerbed block where modulus should not equal the size of  the flowerbed blocks minus the index plus 1
 } else { // if vertical
     flowerbedBlocks.every((_flowerbedBlock, index) => {
@@ -117,14 +76,47 @@ function addFlowerbedPiece(user, flowerbed, startId) {
 
     if (valid && notTaken) { //if the valid variable above is valid, and the blocks are not taken then the flowerbed has been placed correctly and we can add the class name of taken to the flowerbedBlocks
         flowerbedBlocks.forEach(flowerbedBlock => { //iterates over the flowerbedBlocks and adds the name of the flowerbed to the flowerbedBlocks
-            flowerbedBlock.classList.add(flowerbed.name) //adds the name of the flowerbed to the flowerbedBlocks
+            flowerbedBlock.classList.add(flowerbeds.name) //adds the name of the flowerbed to the flowerbedBlocks
             flowerbedBlock.classList.add('taken') //
         })
     } else {
-        addFlowerbedPiece(flowerbed) //if the flowerbed is not valid, then we call the function again to try and place the flowerbed in a different position
+        if (user === 'computer') addFlowerbedPiece(Flowerbed) //if the flowerbed is not valid, then we call the function again to try and place the flowerbed in a different position
+        if (user === 'player') notDropped = true; //if the flowerbed is not valid, then we set the notDropped variable to true
     }
     
 }
 
-flowerbeds.forEach(flowerbed => addFlowerbedPiece('computer', flowerbed)) //iterates over the flowerbeds array and adds the flowerbeds to the neighbour board    
+flowerbeds.forEach(Flowerbed => addFlowerbedPiece('computer', Flowerbed)) //iterates over each Flowerbed object in the flowerbeds array and passes it to the addFlowerbedPiece function, adding it to the board
 
+
+// Placing the flowerbeds on the player board
+
+let draggedFlowerbed // creating a variable to store the dragged flowerbed
+
+const optionFlowerbeds = Array.from(optionContainer.children) //taking the flowerbeds that are in the option container and placing them in an array
+optionFlowerbeds.forEach(optionFlowerbed => optionFlowerbed.addEventListener('dragstart', dragStart)) //iterating over the optionFlowerbeds array and adding an event listener to each optionShip, which will call the dragStart function
+
+const playerBlocks = document.querySelectorAll('#player div') //selecting all of player one's blocks
+playerBlocks.forEach(playerBlock => {
+    playerBlock.addEventListener('dragover', dragOver)
+    playerBlock.addEventListener('drop', dropFlowerbed)
+}) //iterating over the playerBlocks array and adding an event listener to each block, which will call the dragOver function
+
+function dragStart(e) { //function to start the drag
+
+    draggedFlowerbed = e.target //assigning the target of the event to the draggedFlowerbed variable 
+    console.log(e.target)
+}
+
+function dragOver(e) { //function to drag over the flowerbed
+    e.preventDefault() //preventing the default action of the event
+}
+
+function dropFlowerbed(e) {
+    const startId = e.target.id  
+    const flowerbed = flowerbeds[draggedFlowerbed.id]
+    addFlowerbedPiece('player', flowerbed, startId)
+    if (!notDropped) {
+        draggedShip.remove()
+    }
+}
