@@ -35,7 +35,6 @@ export function createBoard(color, user) {
         for (let j = 0; j < 10; j++) {
             const block = document.createElement('div');
             block.classList.add('block');
-    
                 block.dataset.coordinates = `${String.fromCharCode(65 + i)}${j + 1}`;
             row.appendChild(block);
         }
@@ -47,3 +46,6 @@ export function createBoard(color, user) {
 
     return gameBoardContainer;
 }
+
+export const playerBoard = createBoard('green', 'player');
+export const computerBoard = createBoard('darkseagreen', 'computer');

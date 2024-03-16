@@ -98,6 +98,15 @@ FB012:
 - implemented drag and drop for player1's ships
 - the flowerbed blocks are not autoplacing everytime, and the drag and drop is not working either
 
+FB013: 
+- Time is running out and implementing modularisation after having written the code is complicating things. I will revert back to having everything in the same file.
+- Fixed rotate() function, which now rotates the flowerbeds that are located in the option container
+- Added game play functionality for player 1: dragStart(), dragOver(), dropFlowerbed()
+- Once Player 1 has placed their boards the game can start, added startGame() function and button
+- Added handleClick() to determine if player has successfully watered a flowerbed
+- Added functionality for computerTurn()
+- Tried to fix problems with flowerbeds.length not being read by simplifying the addFlowerbedPiece function, need to incorporate error handling 
+
 
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).

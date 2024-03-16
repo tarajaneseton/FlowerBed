@@ -1,4 +1,4 @@
-import { createBoard } from './boards.js';
+import { createBoard, playerBoard, computerBoard } from './boards.js';
 import Flowerbed, { flowerbeds } from './app.js';
 // Purpose: To create flowerbeds based on the config file 
 

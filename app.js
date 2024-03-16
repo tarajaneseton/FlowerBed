@@ -1,11 +1,27 @@
-import { createBoard } from './modules/boards.js';
-import { angle, rotate, rotateButton } from './buttons/rotateButton.js';
-const optionContainer = document.querySelector('.option-container')
+import { createBoard, playerBoard, computerBoard } from './modules/boards.js';
+const startButton = document.querySelector('#start-button')
+const infoDisplay = document.querySelector('#info')
+const turnDisplay = document.querySelector('#turn-display')
+const optionContainer = document.querySelector('.option-container') // change to player-container
+const rotateButton = document.querySelector('#rotate-button')
 
-const playerBoard = createBoard('green', 'player');
-const computerBoard = createBoard('darkseagreen', 'computer');
+// A function to rotate the flowerbeds on button click
 
- // Creating Flowerbeds
+let angle = 0 // global variable to start the flowerbed's angle as 0 
+function rotate() {
+const optionFlowerbeds = Array.from(optionContainer.children) // places the player's flowerbeds into an array
+    angle = angle === 0 ? 90 : 0 //checks if the angle is 0, if it is then it sets the angle to 90, if not then it sets the angle to 0
+    console.log(angle)
+optionFlowerbeds.forEach(optionFlowerbed => optionFlowerbed.style.transform = `rotate(${angle}deg)`)
+}
+
+rotateButton.addEventListener('click', rotate);
+
+// export const playerBoard = createBoard('green', 'player');
+// export const computerBoard = createBoard('darkseagreen', 'computer');
+
+
+ // Creating the Flowerbeds
  export default class Flowerbed {
     constructor(name, length) {
         this.name = name;
@@ -27,9 +43,8 @@ let notDropped
 
 //  function to add flowerbeds to the computer/neighbour board
 
-
+console.log(flowerbeds)
 function addFlowerbedPiece(user, flowerbeds, Flowerbed, startId) {
-    console.log("flowerbeds:", flowerbeds);
 
     const allBoardBlocks = document.querySelectorAll(`#${user} div.block`) // selecting all of the neighbour's blocks
     let randomBoolean = Math.random() < 0.5 // produces a random boolean value
@@ -37,12 +52,29 @@ function addFlowerbedPiece(user, flowerbeds, Flowerbed, startId) {
     let randomStartIndex = Math.floor(Math.random() * 100 ) // produce a random number between 1-100 to start
     
     let startIndex = startId ? startId : randomStartIndex
-    let validStart = isHorizontal ? startIndex <= 100 - flowerbeds.length ? startIndex : //determine if its a valid horizontal start by deducting the size of the flowerbed from the width of the board
-    100 - flowerbeds.length :
-    
-    // handle vertical - this doesnt work right now, vertical is going off the board....
-    startIndex <= 100 - 10 * flowerbeds.length ? startIndex : // if its true, i.e. smaller than 100 - 10 multiplied by the size of the flowerbed then its valid so return the randomstartindex
-    startIndex - flowerbeds.length * 10 + 10 //   if not, then deduct the size of the flowerbed and multiply by the size of the board
+
+    // let validStart = isHorizontal ? startIndex <= 100 - flowerbeds.length ? startIndex : 
+    // 100 - flowerbeds.length :
+    // startIndex <= 100 - 10 * flowerbeds.length ? startIndex : 
+    // startIndex - flowerbeds.length * 10 + 10 
+    let validStart;
+if (isHorizontal) {
+    // If isHorizontal is true
+    if (startIndex <= 100 - flowerbeds.length) {
+        validStart = startIndex;
+    } else {
+        validStart = 100 - flowerbeds.length;
+    } 
+} else {
+    // If isHorizontal is false
+    console.log(flowerbeds)
+
+    if (startIndex <= 100 - 10 * flowerbeds.length) {
+        validStart = startIndex;
+    } else {
+        validStart = startIndex - flowerbeds.length * 10 + 10;
+    }
+}
 
     let flowerbedBlocks = []
  
@@ -80,7 +112,7 @@ function addFlowerbedPiece(user, flowerbeds, Flowerbed, startId) {
             flowerbedBlock.classList.add('taken') //
         })
     } else {
-        if (user === 'computer') addFlowerbedPiece(Flowerbed) //if the flowerbed is not valid, then we call the function again to try and place the flowerbed in a different position
+        if (user === 'computer') addFlowerbedPiece(user, Flowerbed, startId) //if the flowerbed is not valid, then we call the function again to try and place the flowerbed in a different position
         if (user === 'player') notDropped = true; //if the flowerbed is not valid, then we set the notDropped variable to true
     }
     
@@ -94,7 +126,7 @@ flowerbeds.forEach(Flowerbed => addFlowerbedPiece('computer', Flowerbed)) //iter
 let draggedFlowerbed // creating a variable to store the dragged flowerbed
 
 const optionFlowerbeds = Array.from(optionContainer.children) //taking the flowerbeds that are in the option container and placing them in an array
-optionFlowerbeds.forEach(optionFlowerbed => optionFlowerbed.addEventListener('dragstart', dragStart)) //iterating over the optionFlowerbeds array and adding an event listener to each optionShip, which will call the dragStart function
+optionFlowerbeds.forEach(optionFlowerbed => optionFlowerbed.addEventListener('dragstart', dragStart)) //iterating over the optionFlowerbeds array and adding an event listener to each option, which will call the dragStart function
 
 const playerBlocks = document.querySelectorAll('#player div') //selecting all of player one's blocks
 playerBlocks.forEach(playerBlock => {
@@ -103,13 +135,14 @@ playerBlocks.forEach(playerBlock => {
 }) //iterating over the playerBlocks array and adding an event listener to each block, which will call the dragOver function
 
 function dragStart(e) { //function to start the drag
-
+    notDropped = false
     draggedFlowerbed = e.target //assigning the target of the event to the draggedFlowerbed variable 
     console.log(e.target)
 }
 
 function dragOver(e) { //function to drag over the flowerbed
     e.preventDefault() //preventing the default action of the event
+    const flowerbed = flowerbeds[draggedFlowerbed.id] //assigning the flowerbeds to the draggedFlowerbed id
 }
 
 function dropFlowerbed(e) {
@@ -117,6 +150,128 @@ function dropFlowerbed(e) {
     const flowerbed = flowerbeds[draggedFlowerbed.id]
     addFlowerbedPiece('player', flowerbed, startId)
     if (!notDropped) {
-        draggedShip.remove()
+        draggedFlowerbed.remove()
     }
 }
+
+//game logic functions
+
+let gameOver = false;
+let playerTurn
+
+
+
+
+
+//Start the game
+function startGame() {
+    if (optionContainer.children.length != 0) {
+        infoDisplay.textContent = ('Please place all of your flowerbeds before starting the game!')
+    } else {
+        const allBoardBlocks = document.querySelectorAll('#computer div.block')
+        allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+        }
+        
+    }
+    startButton.addEventListener('click', startGame);
+
+    let playerWateredFlower = []
+    let computerWateredFlower = []
+    const playerWateredFlowerbed = []
+    const computerWateredFlowerbed = []
+
+// a function to determine if the player has watered a flowerbed
+    function handleClick(e) {
+        if (!gameOver) {
+            if (e.target.classList.contains('taken')) {
+                e.target.classList.add('watered')
+                infoDisplay.textContent = 'You watered the Computers flowerbed!'
+                let classes = Array.from(e.target.classList)
+                // filtering the classes to remove the block, watered and taken classes, so that we only pick out the flowerbed class and can tell which have been watered/hit
+                classes = classes.filter(className => className !== 'block')
+                classes = classes.filter(className => className !== 'watered')
+                classes = classes.filter(className => className !== 'taken')
+                playerWateredFlower.push(...classes)
+                scoreCount('player', playerWateredFlower, playerWateredFlowerbed)
+                        }
+            if (!e.target.classList.contains('taken')) { //if the block is not taken, then the player has missed
+                infoDisplay.textContent = 'No flowerbeds were watered this time!'
+                e.target.classList.add('empty')
+            }
+            playerTurn = false 
+            const allBoardBlocks = document.querySelectorAll('#computer div.block')
+            allBoardBlocks.forEach(block => block.replaceWith(block.cloneNode(true)))
+            // allBoardBlocks.forEach(block => block.removeEventListener('click', handleClick))
+            setTimeout(computerTurn, 3000)
+        }
+    }
+
+    // Controls the computer's turn
+    function computerTurn() {
+        if (!gameOver) {
+            turnDisplay.textContent = 'Computers Turn'
+            infoDisplay.textContent = 'The Computer is thinking...'
+
+            setTimeout(() => {
+                let randomTurn = Math.floor(Math.random() * 100)
+                const allBoardBlocks = document.querySelectorAll('#player div.block')
+
+                if (allBoardBlocks[randomTurn].classList.contains('taken') &&
+                    allBoardBlocks[randomTurn].classList.contains('watered')
+                ) {
+                    computerTurn()
+                    return
+                } else if (
+                    allBoardBlocks[randomTurn].classList.contains('taken') &&
+                    !allBoardBlocks[randomTurn].classList.contains('watered')
+
+             ) {
+                allBoardBlocks[randomTurn].classList.add('watered')
+                infoDisplay.textContent = 'The Computer watered your flowerbed!'
+                let classes = Array.from(allBoardBlocks[randomTurn].classList)
+                // filtering the classes to remove the block, watered and taken classes, so that we only pick out the flowerbed class and can tell which have been watered/hit
+                classes = classes.filter(className => className !== 'block')
+                classes = classes.filter(className => className !== 'watered')
+                classes = classes.filter(className => className !== 'taken')
+                computerWateredFlower.push(...classes)
+                scoreCount('computer', computerWateredFlower, computerWateredFlowerbed)
+                } else {
+                    infoDisplay.textContent = 'No flowerbeds were watered this time!'
+                    allBoardBlocks[randomTurn].classList.add('empty')
+                }
+    }, 3000)
+
+    setTimeout(() => {
+        playerTurn = true
+        turnDisplay.textContent = 'Your Turn'
+        infoDisplay.textContent = 'Please take your turn!'
+       const allBoardBlocks = document.querySelectorAll('#computer div.block')
+       allBoardBlocks.forEach(block => block.addEventListener('click', handleClick))
+    }, 6000)
+}
+    }
+
+    // function to determine the winner
+    function scoreCount(user, userWateredFlower, userWateredFlowerbeds) {
+
+        function checkFlowerbed(flowerbedName, flowerbedLength) {
+            if (
+                userWateredFlower.filter(storedFlowerbedName => storedFlowerbedName === flowerbedName).length === flowerbedLength
+            ) {
+                infoDisplay.textContent = `You have watered the ${user}'s ${flowerbedName}!`
+                if (user === 'player') {
+                    playerWateredFlower = userWateredFlower.filter(storedFlowerbedName => storedFlowerbedName !== flowerbedName)
+                }
+            }
+        }
+        checkFlowerbed('sunflower', 6)
+        checkFlowerbed('tuilp', 5)
+        checkFlowerbed('hibiscus', 4)
+        checkFlowerbed('hyacinth', 3)
+        checkFlowerbed('rose', 2)
+
+        console.log('playerWateredFlower', playerWateredFlower)
+        console.log('playerWateredFlowerbed', playerWateredFlowerbed)
+
+
+    }
