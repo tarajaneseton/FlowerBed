@@ -107,6 +107,12 @@ FB013:
 - Added functionality for computerTurn()
 - Tried to fix problems with flowerbeds.length not being read by simplifying the addFlowerbedPiece function, need to incorporate error handling 
 
+FB014:
+- added setup page for index.html and styled it
+- created new pages for oneplayer game and quit game
+- added fucntionality for one player and quit game buttons
+- removed unused files, create file for boards.js
+
 
 2. Development (academic standard: merit level detail: section required for merit) – 15%
 a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).

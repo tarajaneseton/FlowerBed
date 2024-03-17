@@ -1,8 +1,84 @@
+body {
+    margin: 0;
+    background-color: #f3f3f3;
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.setup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: column;
+    align-items: center;
+    height: 66vh;
+}
+
+.setup-title {
+    font-family: "Madimi One", sans-serif;
+    font-size: 4rem;
+}
+
+.setup-flowerbed-image {
+    /* position: relative; */
+    /* align-items: center; */
+    vertical-align: center;
+    right: 50;
+    left: 50;
+    /* top: 400vh; */
+    /* top: 10vh; */
+    height: 200px;
+    max-width: 40%;
+    /* width: 40%; */
+    pointer-events: none;
+}
+
+.quit-container {
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 66vh;
+}
+
+.quit-title {
+    padding: 20px;
+}
+
+.button {
+    background-color: #ff69b4;
+    padding: .5em 1em;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: .2em;
+    color: #333;
+}
+
+.button:hover, .button:focus {
+    background-color: #ff1493;
+}
+
+.setup-button {
+    font-size: 1rem;
+    margin-left: 2rem;
+}
+
+.setup-button:first-child {
+    margin-left: 0;
+
+}
 
 #gamesboard-container {
-    width: 500px;
+    width: 600px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin: 60px auto;
 }
 
 .game-board {
@@ -43,10 +119,7 @@
     padding-bottom: 3px;
 }
 
-.taken {
-    background-color: #b1def5;
 
-}
 
 .emoji {
     display: flex;
@@ -141,3 +214,10 @@
     margin: 3px;
 };
 
+.watered {
+    background-color: blue !important;
+}
+
+/* #computer .sunflower, #computer .tulip, #computer .hyacinth, #computer .hibiscus, #computer .rose {
+    background-color: darkseagreen;
+} */

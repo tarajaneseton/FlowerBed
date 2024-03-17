@@ -46,6 +46,3 @@ export function createBoard(color, user) {
 
     return gameBoardContainer;
 }
-
-export const playerBoard = createBoard('green', 'player');
-export const computerBoard = createBoard('darkseagreen', 'computer');
