@@ -1,221 +1,211 @@
 body {
-    margin: 0;
-    background-color: #f3f3f3;
-    overflow-x: hidden;
+  margin: 0;
+  background-color: #f3f3f3;
+  overflow-x: hidden;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
-    font-family: 'Open Sans', sans-serif;
-
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
 }
 
 .setup-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: column;
-    align-items: center;
-    height: 66vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: column;
+  align-items: center;
+  height: 66vh;
 }
 
 .setup-title {
-    font-family: "Madimi One", sans-serif;
-    font-size: 4rem;
+  font-family: "Madimi One", sans-serif;
+  font-size: 4rem;
 }
 
 .setup-flowerbed-image {
-    /* position: relative; */
-    /* align-items: center; */
-    vertical-align: center;
-    right: 50;
-    left: 50;
-    /* top: 400vh; */
-    /* top: 10vh; */
-    height: 200px;
-    max-width: 40%;
-    /* width: 40%; */
-    pointer-events: none;
+  vertical-align: center;
+  right: 50;
+  left: 50;
+  height: 200px;
+  max-width: 40%;
+  pointer-events: none;
 }
 
 .quit-container {
-     display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 66vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 66vh;
 }
 
 .quit-title {
-    padding: 20px;
+  padding: 20px;
 }
 
 .button {
-    background-color: #ff69b4;
-    padding: .5em 1em;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    cursor: pointer;
-    border-radius: .2em;
-    color: #333;
+  background-color: #ff69b4;
+  padding: 0.5em 1em;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 0.2em;
+  color: #333;
 }
 
-.button:hover, .button:focus {
-    background-color: #ff1493;
+.button:hover,
+.button:focus {
+  background-color: #ff1493;
 }
 
 .setup-button {
-    font-size: 1rem;
-    margin-left: 2rem;
+  font-size: 1rem;
+  margin-left: 2rem;
 }
 
 .setup-button:first-child {
-    margin-left: 0;
-
+  margin-left: 0;
 }
 
 #gamesboard-container {
-    width: 600px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 60px auto;
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 60px auto;
 }
 
 .game-board {
-    width: 230px;
-    height: 240px;
-    display: flex;
-    flex-wrap: wrap;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .block {
-    width: 20px;
-    height: 20px;
-    border: solid 1px black;
-    box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  border: solid 1px black;
+  box-sizing: border-box;
 }
 
-.option-container { 
-    width: 1200px;
-    height: 140px;
-    margin: 60px 0;
-    background-color: #E5E4E2;
-    display: flex;
-    align-items: center;
+.option-container {
+  width: 1200px;
+  height: 140px;
+  margin: 60px 0;
+  background-color: #e5e4e2;
+  display: flex;
+  align-items: center;
 }
 
 .labels-row {
-    position: relative;
-    top: 17px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 16px;
-    text-align: center;
+  position: relative;
+  top: 20px;
+  font-size: 12px;
+  text-align: center;
 }
 
 .label {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 16px;
-    text-align: center;
-    padding-bottom: 3px;
+  font-size: 12px;
+  text-align: center;
+  padding-bottom: 3px;
 }
-
-
 
 .emoji {
-    display: flex;
-    align-items: center;
-    vertical-align: middle;
-    /* padding: 2px 2px 2px 2px; */
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
-    /* font-size: 12px; */
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
-
-.rose::before { /*::before needed to produce emoji*/
-    background-color: #F5B7B1;
-    content: "🌹";
-    font-size: 15px;
-    vertical-align: text-top;
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
-
+.rose {
+  /*::before needed to produce emoji*/
+  background-color: #f5b7b1;
+  content: "🌹";
+  font-size: 15px;
+  vertical-align: text-top;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
 .hibiscus {
-    background-color: lightgreen;
-    content: "🌺";
-    font-size: 15px;
-    vertical-align: text-top;
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
+  background-color: lightgreen;
+  content: "🌺";
+  font-size: 15px;
+  vertical-align: text-top;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
 .hyacinth {
-    background-color: lightyellow;
-    content: "🪻";
-    font-size: 15px;
-    vertical-align: text-top;
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
+  background-color: lightyellow;
+  content: "🪻";
+  font-size: 15px;
+  vertical-align: text-top;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
 .tulip {
-    background-color: lightblue;
-    content: "🌷";
-    font-size: 15px;
-    vertical-align: text-top;
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
+  background-color: lightblue;
+  content: "🌷";
+  font-size: 15px;
+  vertical-align: text-top;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
 .sunflower {
-    background-color: black;
-    content: "🌻";
-    font-size: 15px;
-    vertical-align: text-top;
-    border-radius: 2px;
-    margin: auto;
-    width: 100%;
+  background-color: black;
+  content: "🌻";
+  font-size: 15px;
+  vertical-align: text-top;
+  border-radius: 2px;
+  margin: auto;
+  width: 100%;
 }
 
 .rose-preview {
-    width: 40px;
-    height: 20px;
-    margin: 3px;
+  width: 40px;
+  height: 20px;
+  margin: 3px;
 }
 
 .hibiscus-preview {
-    width: 80px;
-    height: 20px;
-    margin: 3px;
+  width: 80px;
+  height: 20px;
+  margin: 3px;
 }
 
 .hyacinth-preview {
-    width: 60px;
-    height: 20px;
-    margin: 3px;
+  width: 60px;
+  height: 20px;
+  margin: 3px;
 }
 
 .tulip-preview {
-    width: 100px;
-    height: 20px;
-    margin: 3px;
+  width: 100px;
+  height: 20px;
+  margin: 3px;
 }
 
 .sunflower-preview {
-    width: 120px;
-    height: 20px;
-    margin: 3px;
-};
+  width: 120px;
+  height: 20px;
+  margin: 3px;
+}
 
 .watered {
-    background-color: blue !important;
+  background-color: blue !important;
 }
 
 /* #computer .sunflower, #computer .tulip, #computer .hyacinth, #computer .hibiscus, #computer .rose {

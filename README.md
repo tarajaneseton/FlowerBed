@@ -16,13 +16,7 @@ b. UML style diagram illustrating initial overall solution
 
 In order to help plan and prioritise tasks for the build of FlowerBed, I read through my assignment document and broke the work down into smaller tasks. The first version or MVP  of FlowerBed should have:
 
-- 2 10x10 boards: a gardenBoard and a neighbourBoard. The gardenBoard is used to position and hold record of the location of your flower beds and any watering made by neighbours. The neighbourBoard is used to keep track of where you have fired and the outcome - hit or miss.
-
-- The boards will make use of a coordinate system where letters represent columns and numbers represent rows.
-
-- To start the game, each player must place all their flowerbeds on their gardenBoard. As your default opponent is the computer, you should set up your own board first and have the computer decide where to place its ships (auto place)
-
-- The flowerbeds have different sizes and can be either be placed horizontally or vertically. Flowerbeds must be not overlap and neighbouring cells must be left empty.
+- It will be a two player game (player v computer)
 
 - By default there are five type of flowerbeds:
     1. Sunflower 🌻 - Length 6
@@ -31,16 +25,33 @@ In order to help plan and prioritise tasks for the build of FlowerBed, I read th
     4. Hyacinth 🪻 - Length 3 
     5. Rose 🌹 - Length 2
 
-- It will be a two player game (player v computer)
+- Two 10x10 boards: a player board and a computer board. The player's board is used to position and hold record of the location of the flower beds and any watering made by the computer. The computer's board is used to keep track of where the player has watered and the outcome - hit or miss.
 
-- The game is played in turns, where each player ‘waters a plant’ (by calling out a board coordinate) and the
-neighbour indicates whether the 'water' resulted in a "hit" or "miss". A "hit" indicates that the called
-position corresponded to a valid ship coordinate, otherwise it is a "miss". Players record their called
-positions using their targetboard; a record of both “hits” and “misses” should be recorded.
+- The boards will make use of a coordinate system where letters represent columns and numbers represent rows.
 
-d. Analysis and decomposition of the overall problem into key ‘epic’ style tasks (linked to 1b, 1c).
+- To start the game, the computer's flowerbeds are automatically placed. The player must then place all of their flowerbeds on their own board. 
 
-e. Initial object-oriented design ideas and planned phased breakdown into smaller tasks(linked to 1d).
+- Flowerbeds are placed using drag and drop
+
+- The flowerbeds have different sizes and can be either be placed horizontally or vertically by clicking the rotate button. Flowerbeds must be not overlap and neighbouring cells must be left empty.
+
+- To water the computer's flowers you click on squares on the computer's board. Each 'hit' on a flowerbed is recorded as a flower being watered. When the whole flowerbed has been watered, its considered a 'watered flowerbed'
+
+- The game is played in turns, where each player ‘waters a flower' (by clicking on a board coordinate) and the info display indicates whether the 'water' resulted in a "hit" or "miss". A "hit" indicates that the clicked position corresponded to a valid flowerbed coordinate, otherwise it is a "miss" and the info display will read: "no flowerbeds were watered this time". 
+
+###Overall Approach:
+
+This project will follow an Agile development methodology with iterative development cycles. I'll be using vanilla JavaScript for core functionalities, html and css for the styling and construction of the setup page and main game page.
+
+###Development Strategy:
+
+I'll use Git for version control and maintain a clean codebase with proper indentation and commenting. I've used Prettier for formatting.
+
+###Approach to Quality:
+
+The game will be thoroughly tested on different browsers and devices. I'll use Chrome's browser developer tools for debugging and if I have time I'll consider getting user feedback from friends or family to identify usability issues.
+
+##Analysis and decomposition of the overall problem into key ‘epic’ style tasks and planned phased breakdown into smaller tasks
 
 FB004:
 - removed numbering and added coordinates
@@ -95,8 +106,9 @@ FB011:
 FB012:
 - removed config file and all related code
 - reverted to using class for flowerbed
-- implemented drag and drop for player1's ships
-- the flowerbed blocks are not autoplacing everytime, and the drag and drop is not working either
+- Created a function to handle drag start events for flowerbeds.
+- Created a function to handle drag over events to visually indicate potential placement.
+- Created a function to handle drop events, validating placement logic and adding flowerbeds to the board
 
 FB013: 
 - Time is running out and implementing modularisation after having written the code is complicating things. I will revert back to having everything in the same file.
@@ -113,25 +125,36 @@ FB014:
 - added fucntionality for one player and quit game buttons
 - removed unused files, create file for boards.js
 
+FB015: 
+- rename flowerbeds parameter in the addFlowerbedPiece function to avoid confusion with the global variable flowerbeds
+- refactored addFlowerbedPiece function by replacing ternary operators with if-else statements, updated .id with dataset.coordinates, added error handling to ensure that the parameters are provided
 
-2. Development (academic standard: merit level detail: section required for merit) – 15%
-a. Adoption and use of ‘good’ standards(linked to 1a, 1b, 1c).
-b. Phase 1 development: tasks, code review and changes(linked to 1d,1e).
-c. ..repeated for each development phase.
-d. Phase n development: tasks, code review and changes(linked to 1d,1e).
-e. Ensuring quality through testing and resolving bugs(linked to 1a, 1b, 2a, 2b..2c).
-f. Reflection on key design challenges, innovations and how they were solved (with examples).
-3. Evaluation (academic standard: distinction level detail: section required for distinction) – 10%
-a. Analysis with embedded examples of key code refactoring, reuse, smells.
 
-b. Implementation and effective use of ‘advanced’ programming principles(with examples).
+##2. Development
+There are some issues that I have been unable  to fix. The logic for valid placement of flowerbeds on the computer's board isn't working each time. I created a maxAttempts to prevent an infinite loop that was occuring, however even with it set to 1000, there are still occasions where the validity of the flowerbeds cannot be maintained which usggests that there are improvements that need to be paid to the addFlowerbedPiece function.
 
-After building the basic functionality for Flowerbeds: 2 boards that are 10x10 in size with coordinates, 6 ships of different sizes and XYZ, I need to go back and incorporate modularisation into my code. I referred back to my UML diagram and edited the classes that I had originally planned. I began separating my code into separate files, I started with the simplest functions first that had the fewest amount of dependencies: XYZ. I faced difficulties when trying to import the addFlowerbedPiece function. Due to the way I had created thefunction it was hard t o know which dependencies were needed. So I decided to pause on building modules and continue creating the game logic instead. In hindsight if I had taken the time to learn and understand OOP and modularisation to begin with i could have started from a better place.
+###a. Adoption and use of ‘good’ standards
+I've tried to keep my functions simple and have chosen consistent naming conventions for better undetstanding.I have used descriptive class names like taken, watered and empty to enhance code readability. 
+I have used event listeners for drag and drop interactions. 
+I have included comments that are written with simplicity and ease. 
 
-c. Featuresshowcase and embedded innovations(with examples) - opportunity to ‘highlight’ best bits.
 
-d. Improved algorithms – research, design, implementation, and tested confirmation (with examples).
+## 3. Evaluation 
 
-Added modularisation
-Added Node.js (?) - original tutorial uses things like queryselector however i needed to change this to work with node. I wanted to implement node because xyz
-e. Reflective review, opportunitiesto improve and continued professional development.
+### a. Analysis with embedded examples of key code refactoring, reuse, smells.
+ notDropped: I changed the name of this variable to isPlaced for better understanding.
+### b. Implementation and effective use of ‘advanced’ programming principles(with examples).
+
+After building the basic functionality for the Flowerbeds game with 2 boards that are 10x10 in size with coordinates, 6 ships of different sizes and functions to autoplace and manually place the flowerbeds, I was advised to go back and incorporate modularisation into my code as well as proper use of  the .ini file. I referred back to my UML diagram and edited the classes that I had originally planned. I began separating my code into separate files, I started with the simplest functions first that had the fewest amount of dependencies. I installed Node and then tried to swap out my use of things like query selector which uses the DOM. However I faced difficulties when trying to import the addFlowerbedPiece function. I found myself getting confused between NPM, Node and vanilla javascript and use of DOM. I spent quite alot of time trying to change the structure of my code and in the end I decided to stick to one file rather than use modularisation. In hindsight if I had the time to learn and understand OOP and modularisation to begin with i could have started from a better place.
+
+### e. Reflective review, opportunitiesto improve and continued professional development.
+
+- Unit Testing: I haven't included unit tests, I didn't have time to implement these. It would be useful to test the validity and robustness of my core functionalities like testing the placement of the flowerbeds, detecting whether flowers or flowerbeds have been watered as well as game state updates like hits, current score and who's winning. 
+- Code: Many of my functions are complicated and go over many lines. It would have been good to break these down into smaller and more focused functions. There are a few functions that aren't working correctly, such as the placement of the player's flowerbeds where there is duplication. I spent a long tiem trying to work out why my addflowerbedpiece function doesnt work, but I could have separated the horizontal and vertical logic. In addition, smaller, more focused would have made my debugging easier when trying to fix the issues. 
+- Error handling for addFlowerbedPiece function. Currently, this function randomly attempts to place flowerbeds for the computer until considered valid after a maximum of 1000 attempts. I have increased the attempts from 10, all the way to 1000 and there are still issues with the placement of the computer's flowerbeds - there is still invalidity. It could have been better to implement a better placement algorithm or introduce a new action after failure/invalidity such as skipping the computer's turn
+
+Continued Professional Development:
+
+1. Learn Unit Testing
+2. Learn advanced JavaScript concepts such as object-oriented programming principles, modules, and design patterns.
+3. Learn a front-end framework like React to structure my user interface and make use of components more effectively 

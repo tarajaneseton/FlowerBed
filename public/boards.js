@@ -1,35 +1,33 @@
 const gamesBoardContainer = document.querySelector('#gamesboard-container')
 
-// Function to create a board with columns, rows and blocks with coordinates based on the config file
+// A function to create the game board 
 export function createBoard(color, user) {
-    const gameBoardContainer = document.createElement('div') //creating a div using javascript for the singular gameboard
-    gameBoardContainer.classList.add('game-board') // adding the class name of game-board to assign height and width in css
-    gameBoardContainer.style.backgroundColor = color
-    gameBoardContainer.id = user
+    const gameBoardContainer = document.createElement('div') // creating a div element to hold the game board
+    gameBoardContainer.classList.add('game-board') // adding a class to the game board div
+    gameBoardContainer.style.backgroundColor = color // setting the background color of the game board
+    gameBoardContainer.id = user // setting the id of the game board to the user's name
 
-    
-    // Creating row labels 1-10
-    const labelsRow = document.createElement('div');
-    labelsRow.classList.add('labels-row');
-    for (let i = 1; i <= 10; i++) { //creates row labels 1-10
-        const label = document.createElement('div'); 
-        label.classList.add('label'); // adding a label class to create the row labels 1-10
-        label.textContent = i;
-        labelsRow.appendChild(label);
+    // creating the row labels 1-10
+    const labelsRow = document.createElement('div'); // creating a div element to hold the row labels
+    labelsRow.classList.add('labels-row'); // adding a class to the row labels div
+    for (let i = 1; i <= 10; i++) { // a loop to create the row labels 1-10
+        const label = document.createElement('div'); // creating a div element to hold the row labels
+        label.classList.add('label'); // adding a class to the row label div
+        label.textContent = i; // setting the text content of the row label div to the current value of i
+        labelsRow.appendChild(label); // appending the row label div to the row labels div
     }
-    gameBoardContainer.appendChild(labelsRow);
+    gameBoardContainer.appendChild(labelsRow); // appending the row labels div to the game board div
 
    // a loop to create the columns and blocks
-    for (let i = 0; i < 10; i++) { 
+    for (let i = 0; i < 10; i++) {  // 
         const row = document.createElement('div');
         row.classList.add('row');
 
         // Labelling the columns A-J
-        const columnLabel = document.createElement('div');
-        columnLabel.classList.add('label');
-        // rowLabel.textContent = i;
-        columnLabel.textContent = String.fromCharCode(65 + i);
-        row.appendChild(columnLabel);
+        const columnLabel = document.createElement('div'); // creating a div element to hold the column labels
+        columnLabel.classList.add('label'); // adding a class to the column label div
+        columnLabel.textContent = String.fromCharCode(65 + i); 
+        row.appendChild(columnLabel); // appending the column label div to the row div
 
         //creating the blocks
         for (let j = 0; j < 10; j++) {
@@ -46,3 +44,4 @@ export function createBoard(color, user) {
 
     return gameBoardContainer;
 }
+
